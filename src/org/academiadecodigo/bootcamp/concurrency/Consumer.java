@@ -21,6 +21,20 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
+        if(queue.getSize() == 0){
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        while (elementNum > 0){
+            synchronized (queue){
+                int item = queue.poll();
+                elementNum--;
+
+                System.out.println("Element consumed " + item);
+            }
+        }
+
 
     }
 

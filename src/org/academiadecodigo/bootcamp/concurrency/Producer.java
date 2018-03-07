@@ -21,7 +21,18 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
+        if(queue.getSize() == queue.getLimit()){
+            System.out.println("Queue is full");
+            return;
+        }
 
+        while (elementNum > 0){
+            synchronized (queue){
+                queue.offer(elementNum);
+                elementNum--;
+                System.out.println("Element produced: " + elementNum);
+            }
+        }
     }
 
 }
